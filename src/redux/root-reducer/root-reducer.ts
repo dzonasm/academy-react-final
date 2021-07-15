@@ -1,15 +1,11 @@
 import { combineReducers } from "redux";
 
-// import addsReducer from '../adds/adds.reducer'
 import shoppingCartReducer from "../shopping-cart/shopping-cart.reducer";
-// import cartWidgetReducer from "../widget-reducer/widget.reducer";
-import sortingReducer from "../sorting-reducer/sorting-reducer";
+import userReducer from "../userReducer/user-reducer";
 
 const rootReducer = combineReducers({
-	// items: addsReducer,
 	shoppingCart: shoppingCartReducer,
-	// widget: cartWidgetReducer,
-	sort: sortingReducer,
+	user: userReducer,
 });
 
 export default rootReducer;
