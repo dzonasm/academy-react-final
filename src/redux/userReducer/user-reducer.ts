@@ -4,16 +4,17 @@ const INITIAL_STATE = {
 	currentUser: {},
 };
 
-const sortingReducer = (state: userReducerState = INITIAL_STATE, action: userReducerAction) => {
+const userReducer = (state: userReducerState = INITIAL_STATE, action: userReducerAction) => {
 	switch (action.type) {
 		case userActionTypes.GET_USER_START:
 			return {
 				...state,
 				currentUser: action.payload,
 			};
+
 		default:
 			return state;
 	}
 };
 
-export default sortingReducer;
+export default userReducer;
