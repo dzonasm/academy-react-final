@@ -37,6 +37,7 @@ export default function LoginComponent() {
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
+			console.log("effect from login");
 			dispatch({ type: userActionTypes.SET_USER, payload: user });
 		});
 

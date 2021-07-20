@@ -3,10 +3,14 @@ import "./board.scss";
 
 const Board = () => {
 	const [board, setBoard] = useState(null);
-	
-	
 
-	return <h1>Board</h1>;
+	return (
+		<>
+			<div className="board-container">
+				<div className="board"></div>
+			</div>
+		</>
+	);
 };
 
 export default Board;

@@ -40,13 +40,15 @@ export default function SignUpComponent() {
 		setLoading(false);
 	};
 
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user =>
-			dispatch({ type: userActionTypes.SET_USER, payload: user }),
-		);
+	// useEffect(() => {
+	// 	const unsubscribe = auth.onAuthStateChanged(user => {
+	// 		console.log("effect from signup");
 
-		return unsubscribe;
-	}, []);
+	// 		dispatch({ type: userActionTypes.SET_USER, payload: user });
+	// 	});
+
+	// 	return unsubscribe;
+	// }, []);
 
 	return (
 		<div className="w-100 max-w-400">

@@ -1,5 +1,5 @@
 export enum RoutingConstants {
 	LOGIN = "/login",
-	HOME = "/home",
+	HOME = "/",
 	SIGNUP = "/signup",
 }

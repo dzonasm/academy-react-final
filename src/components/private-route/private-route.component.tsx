@@ -1,6 +1,9 @@
 import { Route, Redirect, RouteProps } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/root-reducer/root-reducer";
+import { useEffect } from "react";
+import { auth } from "../../firebase";
+import { userActionTypes } from "../../redux/types/types";
 
 export type ProtectedRouteProps = {
 	authenticationPath: string;
@@ -12,5 +15,5 @@ export const PrivateRoute = ({ authenticationPath, ...routeProps }: ProtectedRou
 
 	console.log(currentUser);
 
-	return currentUser ? <Route {...routeProps} /> : <Redirect to={authenticationPath} />;
+	return currentUser?.email ? <Route {...routeProps} /> : <Redirect to={authenticationPath} />;
 };
