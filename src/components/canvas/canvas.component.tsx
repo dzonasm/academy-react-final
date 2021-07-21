@@ -12,9 +12,22 @@ export default function Canvas() {
 			canvas.style.height = `${window.innerHeight}px`;
 
 			const context = canvas.getContext("2d");
+			context?.scale(2, 2);
+			//@ts-ignore
+			context?.lineCap = "round";
+			//@ts-ignore
+			context?.strokeStyle = "black";
+			//@ts-ignore
+			context?.lineWidth = 5;
 			contextRef.current = context;
 		}
 	}, []);
+
+	const placeDot = ({ nativeEvent }: React.MouseEvent<HTMLElement>) => {
+		console.log(nativeEvent);
+		const {} = nativeEvent;
+		contextRef.current?.fillRect;
+	};
 
 	return <canvas ref="canvas"></canvas>;
 }
