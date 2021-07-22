@@ -27,7 +27,8 @@ function App() {
 	return (
 		<div className="App">
 			<Switch>
-				<PrivateRoute exact path="/" authenticationPath={RoutingConstants.LOGIN} component={Homepage} />
+				{/* <PrivateRoute exact path="/" authenticationPath={RoutingConstants.LOGIN} component={Homepage} /> */}
+				<Route exact path="/" component={Homepage} />
 				<Route path="/signup" component={SignUpPage} />
 				<Route path="/login" component={LogInPage} />
 			</Switch>

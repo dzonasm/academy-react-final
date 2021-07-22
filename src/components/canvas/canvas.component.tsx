@@ -1,33 +1,58 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { ADD_COORDINATE } from "../../redux/types/types";
+import { v4 as uuidv4 } from "uuid";
+import "./canvas.styles.scss";
 
-export default function Canvas() {
+interface CanvasProps {
+	width: number;
+	height: number;
+}
+
+const Canvas = ({ width, height }: CanvasProps) => {
+	const [_drawing, setDrawing] = useState(false);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
-	const contextRef = useRef<CanvasRenderingContext2D | null>(null);
-	useEffect(() => {
-		if (canvasRef.current) {
-			const canvas = canvasRef.current;
-			canvas.width = window.innerWidth * 2;
-			canvas.height = window.innerHeight * 2;
-			canvas.style.width = `${window.innerWidth}px`;
-			canvas.style.height = `${window.innerHeight}px`;
 
-			const context = canvas.getContext("2d");
-			context?.scale(2, 2);
-			//@ts-ignore
-			context?.lineCap = "round";
-			//@ts-ignore
-			context?.strokeStyle = "black";
-			//@ts-ignore
-			context?.lineWidth = 5;
-			contextRef.current = context;
-		}
-	}, []);
+	const dispatch = useDispatch();
 
-	const placeDot = ({ nativeEvent }: React.MouseEvent<HTMLElement>) => {
-		console.log(nativeEvent);
-		const {} = nativeEvent;
-		contextRef.current?.fillRect;
+	const setCoordinate = (x: number, y: number) => {
+		dispatch({ type: ADD_COORDINATE, payload: { id: uuidv4(), coordx: x, coordy: y } });
 	};
 
-	return <canvas ref="canvas"></canvas>;
-}
+	const draw = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+		setDrawing(true);
+		const {
+			//@ts-ignore yes, typescript, they do exist here
+			nativeEvent: { layerX, layerY },
+		} = e;
+		if (canvasRef.current) {
+			const canvas = canvasRef.current;
+			const context = canvas.getContext("2d");
+			if (context) {
+				context.rect(layerX, layerY, 3, 3);
+				context.fill();
+				context.closePath();
+				setCoordinate(layerX, layerY);
+			}
+		}
+	};
+
+	return (
+		<div className="canvas-container">
+			<canvas
+				onMouseDown={e => draw(e)}
+				onMouseUp={() => setDrawing(false)}
+				ref={canvasRef}
+				height={height}
+				width={width}
+			/>
+		</div>
+	);
+};
+
+Canvas.defaultProps = {
+	width: "400px",
+	height: "400px",
+};
+
+export default Canvas;

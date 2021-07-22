@@ -10,6 +10,7 @@ import { userActionTypes } from "../../redux/types/types";
 import { RoutingConstants } from "../../common/routingContstants";
 import "../../common/common-styles.styles.scss";
 import Board from "../../components/board/board.component";
+import Canvas from "../../components/canvas/canvas.component";
 
 export const Homepage = () => {
 	const [error, setError] = useState("");
@@ -58,6 +59,7 @@ export const Homepage = () => {
 			</div>
 			<div className="row justify-content-center">
 				<Board></Board>
+				<Canvas></Canvas>
 			</div>
 		</div>
 	);
