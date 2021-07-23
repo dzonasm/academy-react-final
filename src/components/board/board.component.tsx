@@ -7,15 +7,19 @@ import { createCoordinatesForSvgs } from "./svg/createSvgs";
 import SvgComponent from "./svg/svg.component";
 
 const Board = () => {
-	const [rotateX, setRotateX] = useState("");
-	const [rotateY, setRotateY] = useState("");
-	const [rotateZ, setRotateZ] = useState("");
-	const [perspective, setPerspective] = useState("");
+	const [threeDee, setThreeDee] = useState({
+		perspective: "0",
+		rotateX: "0",
+		rotateY: "0",
+		rotateZ: "0",
+	});
+	const { perspective, rotateX, rotateY, rotateZ } = threeDee;
 
-	const styles = {
+	let styles = {
 		transform: `perspective(${perspective}px)
-		 rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`,
+			 rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`,
 	};
+
 	const coordinates = useSelector(selectCoordinates);
 	const createdCoords = useMemo(() => createCoordinatesForSvgs(coordinates), [coordinates]);
 	const content = createdCoords.map(entry => {
@@ -25,22 +29,26 @@ const Board = () => {
 		);
 	});
 
+	const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>, key: string) => {
+		setThreeDee({ ...threeDee, [key]: e.target.value });
+	};
+
 	return (
 		<>
 			<div className="board-container max-w-450">
 				<Card>
 					<Card.Body className="d-flex flex-column">
 						<label>perspective: {perspective}px;</label>
-						<input onChange={e => setPerspective(e.target.value)} type="range" min="0" max="999" />
+						<input onChange={e => handleSliderChange(e, "perspective")} type="range" min="0" max="999" />
 
 						<label>rotateX: {rotateX}deg; </label>
-						<input onChange={e => setRotateX(e.target.value)} type="range" min="-180" max="180" />
+						<input onChange={e => handleSliderChange(e, "rotateX")} type="range" min="-180" max="180" />
 
 						<label>rotateY: {rotateY}deg; </label>
-						<input onChange={e => setRotateY(e.target.value)} type="range" min="-180" max="180" />
+						<input onChange={e => handleSliderChange(e, "rotateY")} type="range" min="-180" max="180" />
 
 						<label>rotateZ: {rotateZ}deg; </label>
-						<input onChange={e => setRotateZ(e.target.value)} type="range" min="-180" max="180" />
+						<input onChange={e => handleSliderChange(e, "rotateZ")} type="range" min="-180" max="180" />
 					</Card.Body>
 				</Card>
 
