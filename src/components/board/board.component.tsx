@@ -13,8 +13,7 @@ const Board = () => {
 	const [perspective, setPerspective] = useState("");
 
 	const styles = {
-		perspective: `${perspective}px`,
-		transform: `
+		transform: `perspective(${perspective}px)
 		 rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`,
 	};
 	const coordinates = useSelector(selectCoordinates);
