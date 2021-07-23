@@ -1,13 +1,22 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { selectCoordinates } from "../../redux/selectors/selectors";
 import "./board.scss";
-import { createCoordinatesForSvgs, coordinatesForSvg } from "./svg/createSvgs";
+import { createCoordinatesForSvgs } from "./svg/createSvgs";
 import SvgComponent from "./svg/svg.component";
 
 const Board = () => {
-	const [board, setBoard] = useState(null);
+	const [rotateX, setRotateX] = useState("");
+	const [rotateY, setRotateY] = useState("");
+	const [rotateZ, setRotateZ] = useState("");
+	const [perspective, setPerspective] = useState("");
+
+	const styles = {
+		perspective: `${perspective}px`,
+		transform: `
+		 rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`,
+	};
 	const coordinates = useSelector(selectCoordinates);
 	const createdCoords = useMemo(() => createCoordinatesForSvgs(coordinates), [coordinates]);
 	const content = createdCoords.map(entry => {
@@ -17,28 +26,29 @@ const Board = () => {
 		);
 	});
 
-	console.log(content);
 	return (
 		<>
 			<div className="board-container max-w-450">
 				<Card>
 					<Card.Body className="d-flex flex-column">
-						<label>perspective: 0px;</label>
-						<input type="range" min="0" max="999" />
+						<label>perspective: {perspective}px;</label>
+						<input onChange={e => setPerspective(e.target.value)} type="range" min="0" max="999" />
 
-						<label>rotateX: 0deg; </label>
-						<input type="range" min="-180" max="180" />
+						<label>rotateX: {rotateX}deg; </label>
+						<input onChange={e => setRotateX(e.target.value)} type="range" min="-180" max="180" />
 
-						<label>rotateY: 0deg; </label>
-						<input type="range" min="-180" max="180" />
+						<label>rotateY: {rotateY}deg; </label>
+						<input onChange={e => setRotateY(e.target.value)} type="range" min="-180" max="180" />
 
-						<label>rotateZ: 0deg; </label>
-						<input type="range" min="-180" max="180" />
+						<label>rotateZ: {rotateZ}deg; </label>
+						<input onChange={e => setRotateZ(e.target.value)} type="range" min="-180" max="180" />
 					</Card.Body>
 				</Card>
 
 				<div className="board">
-					<div className="perspective">{content}</div>
+					<div className="perspective" style={styles}>
+						{content}
+					</div>
 				</div>
 			</div>
 		</>
