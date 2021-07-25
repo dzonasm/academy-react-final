@@ -33,28 +33,29 @@ const Header = () => {
 						Perspective
 					</Link>
 				</Navbar.Brand>
-				<Nav className="me-auto">
-					<Nav.Link>
-						<Link className="nav-link" to={RoutingConstants.LOGIN}>
-							Login
-						</Link>
-					</Nav.Link>
-					<Nav.Link>
-						<Link className="nav-link" to={RoutingConstants.SIGNUP}>
-							SignUp
-						</Link>
-					</Nav.Link>
-					<Button className="btn btn-primary" onClick={handleLogout}>
-						Logout
-					</Button>
-				</Nav>
+				{!user ? (
+					<Nav className="me-auto">
+						<Nav.Link>
+							<Link className="nav-link" to={RoutingConstants.LOGIN}>
+								Login
+							</Link>
+						</Nav.Link>
+						<Nav.Link>
+							<Link className="nav-link" to={RoutingConstants.SIGNUP}>
+								SignUp
+							</Link>
+						</Nav.Link>
+					</Nav>
+				) : null}
 				<Navbar.Toggle />
-				<Navbar.Collapse className="justify-content-end">
-					<Navbar.Text>Signed in as: {"cant get email"}</Navbar.Text>
-					<Button className="btn btn-primary ms-3" onClick={handleLogout}>
-						Logout
-					</Button>
-				</Navbar.Collapse>
+				{user ? (
+					<Navbar.Collapse className="justify-content-end">
+						<Navbar.Text>Signed in as: {user.email}</Navbar.Text>
+						<Button className="btn btn-primary ms-3" onClick={handleLogout}>
+							Logout
+						</Button>
+					</Navbar.Collapse>
+				) : null}
 			</Container>
 		</Navbar>
 	);

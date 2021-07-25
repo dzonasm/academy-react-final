@@ -29,8 +29,7 @@ function App() {
 		<div className="App">
 			<Header />
 			<Switch>
-				{/* <PrivateRoute exact path="/" authenticationPath={RoutingConstants.LOGIN} component={Homepage} /> */}
-				<Route exact path="/" component={Homepage} />
+				<PrivateRoute exact path="/" authenticationPath={RoutingConstants.LOGIN} component={Homepage} />
 				<Route path="/signup" component={SignUpPage} />
 				<Route path="/login" component={LogInPage} />
 			</Switch>
