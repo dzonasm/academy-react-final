@@ -4,7 +4,7 @@ import { ADD_COORDINATE, coordinateArray, coordinateDot, REMOVE_COORDINATE } fro
 import { v4 as uuidv4 } from "uuid";
 import "./canvas.styles.scss";
 import { selectCoordinates } from "../../redux/selectors/selectors";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 interface CanvasProps {
 	width: number;
 	height: number;
@@ -58,14 +58,14 @@ const Canvas = ({ width, height }: CanvasProps) => {
 	};
 
 	const deleteButtons = coordinates.map(({ coordx, coordy, id }) => (
-		<Button key={uuidv4()} onClick={() => deleteCanvasDot(coordx, coordy, id)} className="btn btn-warning">
+		<Button key={uuidv4()} onClick={() => deleteCanvasDot(coordx, coordy, id)} className="btn btn-warning m-1">
 			Delete coordinate {`x: ${coordx}, y: ${coordy}`}
 		</Button>
 	));
 
 	return (
-		<div className="d-flex flex-column justify-content-start align-items-center p-2">
-			<div className="canvas-container p-2">
+		<div className="d-flex flex-column justify-content-start align-items-center m-2">
+			<div className="canvas-container">
 				<canvas
 					onMouseDown={e => draw(e)}
 					onMouseUp={() => setDrawing(false)}
@@ -74,9 +74,13 @@ const Canvas = ({ width, height }: CanvasProps) => {
 					width={width}
 				/>
 			</div>
-			<div className="d-flex flex-column justify-content-center align-items-center">
-				{coordinates ? deleteButtons : null}
-			</div>
+			<Card className="w-100 mt-3">
+				<Card.Body>
+					<div className="coordinates d-flex flex-column justify-content-center align-items-center">
+						{coordinates ? deleteButtons : null}
+					</div>
+				</Card.Body>
+			</Card>
 		</div>
 	);
 };
