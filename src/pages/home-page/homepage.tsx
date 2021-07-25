@@ -13,8 +13,6 @@ import Board from "../../components/board/board.component";
 import Canvas from "../../components/canvas/canvas.component";
 
 export const Homepage = () => {
-	const [error, setError] = useState("");
-	const history = useHistory();
 	const dispatch = useDispatch();
 
 	useEffect(() => {

@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_COORDINATE, coordinateArray, coordinateDot, REMOVE_COORDINATE } from "../../redux/types/types";
+import { ADD_COORDINATE, coordinateArray, REMOVE_COORDINATE } from "../../redux/types/types";
 import { v4 as uuidv4 } from "uuid";
 import "./canvas.styles.scss";
 import { selectCoordinates } from "../../redux/selectors/selectors";

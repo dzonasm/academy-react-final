@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import SignUpPage from "./pages/signup-page/signup-page";
 import LogInPage from "./pages/login-page/logInPage";

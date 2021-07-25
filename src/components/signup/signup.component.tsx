@@ -1,6 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { userActionTypes } from "../../redux/types/types";
 import { Spinner, Form, Card, Button, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import "./signup.styles.scss";
@@ -11,7 +9,6 @@ export default function SignUpComponent() {
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const dispatch = useDispatch();
 	const history = useHistory();
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);
@@ -39,17 +36,6 @@ export default function SignUpComponent() {
 
 		setLoading(false);
 	};
-
-	// useEffect(() => {
-	// 	const unsubscribe = auth.onAuthStateChanged(user => {
-	// 		console.log("effect from signup");
-
-	// 		dispatch({ type: userActionTypes.SET_USER, payload: user });
-	// 	});
-
-	// 	return unsubscribe;
-	// }, []);
-
 	return (
 		<div className="w-100 max-w-400">
 			<Card>

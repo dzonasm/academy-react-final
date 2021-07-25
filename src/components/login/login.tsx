@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { userActionTypes } from "../../redux/types/types";
 import { Spinner, Form, Card, Button, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase";
@@ -10,7 +9,6 @@ export default function LoginComponent() {
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const dispatch = useDispatch();
 	const history = useHistory();
 	const emailRef = useRef<HTMLInputElement>(null);
 	const passwordRef = useRef<HTMLInputElement>(null);

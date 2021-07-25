@@ -2,8 +2,6 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import LoginComponent from "../../components/login/login";
 import "../../common/common-styles.styles.scss";
-import Canvas from "../../components/canvas/canvas.component";
-import Board from "../../components/board/board.component";
 
 export default function LogInPage() {
 	return (
