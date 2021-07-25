@@ -21,7 +21,7 @@ const coordinateReducer = (
 		case REMOVE_COORDINATE:
 			return {
 				...state,
-				coordinates: [state.coordinates.filter(coord => coord.id !== action.payload.id)],
+				coordinates: state.coordinates.filter(coord => coord.id !== action.payload.id),
 			};
 
 		default:

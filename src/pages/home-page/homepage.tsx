@@ -14,20 +14,8 @@ import Canvas from "../../components/canvas/canvas.component";
 
 export const Homepage = () => {
 	const [error, setError] = useState("");
-	const logout = () => {
-		return auth.signOut();
-	};
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const handleLogout = async () => {
-		try {
-			await logout();
-			history.push(RoutingConstants.LOGIN);
-		} catch (e) {
-			console.log(e);
-			setError("Whoops, failed to log out");
-		}
-	};
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user =>
@@ -42,24 +30,9 @@ export const Homepage = () => {
 			<div className="row">
 				<h1>Drawing perspective</h1>
 			</div>
-			<div className="row justify-content-center">
-				<Card className="max-w-450">
-					<Card.Body className="d-flex flex-column">
-						<h2 className="text-center mb-4">Profile</h2>
-						<Link to="/update-profile">
-							<Button>Update Profile</Button>
-						</Link>
-						<div>
-							<Button onClick={() => handleLogout()} className="mt-2">
-								Logout!
-							</Button>
-						</div>
-					</Card.Body>
-				</Card>
-			</div>
-			<div className="row justify-content-center">
-				<Board></Board>
+			<div className=" d-flex justify-content-center">
 				<Canvas></Canvas>
+				<Board></Board>
 			</div>
 		</div>
 	);

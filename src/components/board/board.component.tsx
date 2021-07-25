@@ -35,9 +35,14 @@ const Board = () => {
 
 	return (
 		<>
-			<div className="board-container max-w-450">
-				<Card>
-					<Card.Body className="d-flex flex-column">
+			<div className="p-2 board-container max-w-450 d-flex flex-column justify-content-center align-items-center">
+				<div className="board">
+					<div className="perspective p2" style={styles}>
+						{content}
+					</div>
+				</div>
+				<Card className="w-100 mb-3 mt-3">
+					<Card.Body className=" d-flex flex-column">
 						<label>perspective: {perspective}px;</label>
 						<input onChange={e => handleSliderChange(e, "perspective")} type="range" min="0" max="999" />
 
@@ -51,12 +56,6 @@ const Board = () => {
 						<input onChange={e => handleSliderChange(e, "rotateZ")} type="range" min="-180" max="180" />
 					</Card.Body>
 				</Card>
-
-				<div className="board">
-					<div className="perspective" style={styles}>
-						{content}
-					</div>
-				</div>
 			</div>
 		</>
 	);

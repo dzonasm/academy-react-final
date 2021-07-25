@@ -30,19 +30,10 @@ export default function LoginComponent() {
 			setLoading(false);
 			history.push(RoutingConstants.HOME);
 		} catch (e) {
-			console.log(e);
 			setError("Whoops, something went wrong");
+			setLoading(false);
 		}
 	};
-
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user => {
-			console.log("effect from login");
-			dispatch({ type: userActionTypes.SET_USER, payload: user });
-		});
-
-		return unsubscribe;
-	}, []);
 
 	return (
 		<div className="w-100 max-w-400">

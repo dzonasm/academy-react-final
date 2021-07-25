@@ -13,6 +13,7 @@ import { RoutingConstants } from "./common/routingContstants";
 import { useDispatch } from "react-redux";
 import { auth } from "./firebase";
 import { userActionTypes } from "./redux/types/types";
+import Header from "./components/header/header.component";
 
 function App() {
 	const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Header />
 			<Switch>
 				{/* <PrivateRoute exact path="/" authenticationPath={RoutingConstants.LOGIN} component={Homepage} /> */}
 				<Route exact path="/" component={Homepage} />

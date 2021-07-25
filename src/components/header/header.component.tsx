@@ -1,26 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { RoutingConstants } from "../../common/routingContstants";
+import { auth } from "../../firebase";
+import { selectCurrentUser } from "../../redux/selectors/selectors";
 
 // import "./header.styles.scss";
 
 const Header = () => {
+	const [error, setError] = useState("");
+	const history = useHistory();
+	const user = useSelector(selectCurrentUser);
+
+	const logout = () => {
+		return auth.signOut();
+	};
+	const handleLogout = async () => {
+		try {
+			await logout();
+			history.push(RoutingConstants.LOGIN);
+		} catch (e) {
+			setError("Whoops, failed to log out");
+		}
+	};
+
 	return (
-		<div className="header">
-			<Link to="/">
-				<h2 className="header-title"> Garaged </h2>
-			</Link>
-			<div className="links">
-				<Link to="/">
-					<p className="header-link">Skelbimai</p>
-				</Link>
-				<Link to="/ikelti">
-					<p className="header-link">Įkelti</p>
-				</Link>
-				<Link to="/cart">
-					<p className="header-link">Krepšelis</p>
-				</Link>
-			</div>
-		</div>
+		<Navbar>
+			<Container>
+				<Navbar.Brand>
+					<Link className="nav-link" to={RoutingConstants.HOME}>
+						Perspective
+					</Link>
+				</Navbar.Brand>
+				<Nav className="me-auto">
+					<Nav.Link>
+						<Link className="nav-link" to={RoutingConstants.LOGIN}>
+							Login
+						</Link>
+					</Nav.Link>
+					<Nav.Link>
+						<Link className="nav-link" to={RoutingConstants.SIGNUP}>
+							SignUp
+						</Link>
+					</Nav.Link>
+					<Button className="btn btn-primary" onClick={handleLogout}>
+						Logout
+					</Button>
+				</Nav>
+				<Navbar.Toggle />
+				<Navbar.Collapse className="justify-content-end">
+					<Navbar.Text>Signed in as: {"cant get email"}</Navbar.Text>
+					<Button className="btn btn-primary ms-3" onClick={handleLogout}>
+						Logout
+					</Button>
+				</Navbar.Collapse>
+			</Container>
+		</Navbar>
 	);
 };
 

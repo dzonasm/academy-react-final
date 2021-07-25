@@ -9,8 +9,6 @@ export default function LogInPage() {
 	return (
 		<Container className=" h-100 d-flex justify-content-center align-items-center">
 			<LoginComponent />
-			<Canvas></Canvas>
-			<Board></Board>
 		</Container>
 	);
 }
